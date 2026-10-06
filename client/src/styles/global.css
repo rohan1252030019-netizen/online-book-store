@@ -1,0 +1,284 @@
+/* ==================================================================
+   GLOBAL STYLES
+   1. Colour variables and reset
+   2. Typography
+   3. Buttons, inputs, message boxes
+   4. Small helpers used across pages
+   ================================================================== */
+
+:root {
+  /* One main accent colour (burnt orange) - a warm bookish shade */
+  --accent: #c2410c;
+  --accent-dark: #9a3412;
+  --accent-soft: #fdf1e7;
+
+  --bg: #faf9f7;            /* page background */
+  --surface: #ffffff;       /* cards and boxes */
+  --text: #1c1917;          /* main text */
+  --muted: #6b6560;         /* secondary text */
+  --border: #e7e2dc;
+
+  --green: #15803d;
+  --green-soft: #e8f5ec;
+  --red: #b91c1c;
+  --red-soft: #fdecec;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(28, 25, 23, 0.05);
+  --shadow-md: 0 6px 18px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.12);
+
+  --serif: Georgia, 'Times New Roman', Times, serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---- Layout helpers ---- */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 72px 0;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.section-head {
+  margin-bottom: 40px;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+}
+
+.btn-outline {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  padding: 6px 10px;
+}
+.btn-ghost:hover {
+  color: var(--accent);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+/* ---- Forms ---- */
+.field {
+  margin-bottom: 18px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.label .optional {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.12);
+}
+
+.input.has-error {
+  border-color: var(--red);
+}
+
+.field-error {
+  color: var(--red);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* ---- Message boxes (success / error) ---- */
+.alert {
+  padding: 12px 15px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  margin-bottom: 18px;
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  background: var(--green-soft);
+  color: var(--green);
+  border-color: #bfe3ca;
+}
+
+.alert-error {
+  background: var(--red-soft);
+  color: var(--red);
+  border-color: #f3c9c9;
+}
+
+/* ---- Badges and small text ---- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* ---- Loading / empty states ---- */
+.state-box {
+  text-align: center;
+  padding: 70px 20px;
+  color: var(--muted);
+}
+
+.state-box h3 {
+  font-family: var(--serif);
+  color: var(--text);
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+/* Simple loading dots - no library needed */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 14px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}

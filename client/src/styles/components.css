@@ -1,0 +1,525 @@
+/* ==================================================================
+   SHARED COMPONENTS
+   Book card, search bar, hero, category tiles, quantity stepper
+   ================================================================== */
+
+/* ---- HERO SECTION ---- */
+.hero {
+  background: linear-gradient(180deg, #fdf6ef 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 76px 0 84px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 50px;
+  line-height: 1.12;
+  letter-spacing: -0.5px;
+  margin-bottom: 18px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero p {
+  font-size: 17.5px;
+  color: var(--muted);
+  max-width: 470px;
+  margin-bottom: 30px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
+.hero-points {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-point b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.hero-point span {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* A small pile of real book covers, styled with plain CSS.
+   No extra image files needed. */
+.hero-visual {
+  position: relative;
+  height: 380px;
+}
+
+.hero-book {
+  position: absolute;
+  width: 172px;
+  border-radius: 4px 9px 9px 4px;
+  box-shadow: var(--shadow-lg);
+  background: var(--surface);
+  padding: 9px;
+  border: 1px solid var(--border);
+}
+
+.hero-book img {
+  border-radius: 3px;
+  width: 100%;
+  height: 236px;
+  object-fit: cover;
+}
+
+.hero-book.b1 {
+  top: 44px;
+  left: 0;
+  transform: rotate(-8deg);
+  z-index: 1;
+}
+.hero-book.b2 {
+  top: 16px;
+  left: 130px;
+  transform: rotate(4deg);
+  z-index: 3;
+}
+.hero-book.b3 {
+  top: 66px;
+  left: 258px;
+  transform: rotate(11deg);
+  z-index: 2;
+}
+
+.hero-note {
+  position: absolute;
+  bottom: 6px;
+  left: 26px;
+  z-index: 4;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 14px;
+}
+
+.hero-note b {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 52px 0 60px;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .hero h1 {
+    font-size: 38px;
+  }
+  .hero p {
+    font-size: 16.5px;
+  }
+  /* On mobile the books sit in a neat row instead of overlapping */
+  .hero-visual {
+    height: auto;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    transform: scale(0.86);
+    transform-origin: top center;
+    margin-bottom: -20px;
+  }
+  .hero-book {
+    position: static;
+    transform: none !important;
+    width: 150px;
+  }
+  .hero-book img {
+    height: 205px;
+  }
+  .hero-note {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero-visual {
+    transform: scale(0.74);
+    margin-bottom: -56px;
+  }
+  .hero-actions .btn {
+    flex: 1;
+  }
+}
+
+/* ---- CATEGORY TILES ---- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.category-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.category-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.category-card b {
+  display: block;
+  font-size: 16.5px;
+  font-family: var(--serif);
+}
+
+.category-card span {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* ---- BOOK GRID + CARD ---- */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .book-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+@media (max-width: 400px) {
+  .book-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.book-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+
+.book-cover {
+  position: relative;
+  background: #f5f2ee;
+  padding: 16px 16px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 208px;
+  object-fit: cover;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 4px 14px rgba(28, 25, 23, 0.16);
+}
+
+.book-cover .badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--surface);
+  color: var(--accent-dark);
+  box-shadow: var(--shadow);
+}
+
+.book-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.book-title {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.35;
+  margin-bottom: 4px;
+  /* keeps long titles from breaking the card layout */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 45px;
+}
+
+.book-author {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.book-foot .price {
+  font-size: 17px;
+}
+
+.book-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.book-btns .btn {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .book-cover img {
+    height: 186px;
+  }
+  .book-title {
+    font-size: 15.5px;
+    min-height: 42px;
+  }
+  /* On narrow screens the two buttons stack so they stay tappable */
+  .book-btns {
+    flex-direction: column;
+  }
+}
+
+/* ---- SEARCH BAR (used on Catalogue + Book Details) ---- */
+.searchbar {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.searchbar input {
+  width: 100%;
+  padding: 11px 40px 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.searchbar input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.12);
+}
+
+.searchbar .clear {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 18px;
+  padding: 4px 8px;
+  line-height: 1;
+}
+.searchbar .clear:hover {
+  color: var(--accent);
+}
+
+/* ---- FILTER BAR ---- */
+.filter-bar {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 26px;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-item label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.filter-item select {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--text);
+  min-width: 178px;
+  cursor: pointer;
+}
+
+.filter-item select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.filter-count {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--muted);
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-item select {
+    width: 100%;
+  }
+  .filter-count {
+    margin-left: 0;
+  }
+}
+
+/* ---- QUANTITY STEPPER (cart page) ---- */
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.qty button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+}
+.qty button:hover:not(:disabled) {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.qty button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qty span {
+  min-width: 40px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+}
